@@ -13,6 +13,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0) as sock:
         conn, addr = ssock.accept()
         #while True:
         mess = conn.recv(1024)
+        print(mess.hex())
         ipVersion=format(mess[0],'08b')
         ipVersion=int(ipVersion[:4], 2)
         print(ipVersion)
@@ -35,8 +36,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0) as sock:
         print(tcpPort)
         print(mess[(ipHeader+tcpHeader):])
         with socket.create_connection((str(destinationIP), tcpPort)) as sock2:
-            sock2.send(mess[52:])
+            sock2.send(mess[(ipHeader+tcpHeader):])
             resp = sock2.recv(1024)
-            #print(resp)
+            print(resp)
             conn.send(resp)
     sock.close()
