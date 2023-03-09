@@ -5,7 +5,7 @@ def connect_to_server(certPath,event,host='127.0.0.1'):
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
     context.load_verify_locations(certPath)
 
-    with socket.create_connection((host, 2233)) as sock:
+    with socket.create_connection((host, 2137)) as sock:
         with context.wrap_socket(sock, server_hostname=hostname) as ssock:
             print(ssock.version())
             s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.htons(3))
